@@ -1,0 +1,241 @@
+/* Icônes spirituelles et éléments visuels inspirants */
+
+/* Icônes personnalisées avec CSS */
+.icon-cross::before {
+    content: "✞";
+    font-size: 1.2em;
+    color: var(--dore-subtil);
+}
+
+.icon-bible::before {
+    content: "📖";
+    font-size: 1.2em;
+    color: var(--vert-foret);
+}
+
+.icon-prayer::before {
+    content: "🙏";
+    font-size: 1.2em;
+    color: var(--bleu-ciel);
+}
+
+.icon-dove::before {
+    content: "🕊️";
+    font-size: 1.2em;
+    color: var(--dore-subtil);
+}
+
+.icon-light::before {
+    content: "💡";
+    font-size: 1.2em;
+    color: var(--dore-subtil);
+}
+
+.icon-heart::before {
+    content: "❤️";
+    font-size: 1.2em;
+    color: #e74c3c;
+}
+
+/* Décorations spirituelles */
+.spiritual-border {
+    border: 2px solid var(--dore-subtil);
+    border-radius: 15px;
+    position: relative;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.05) 0%, rgba(46, 125, 50, 0.05) 100%);
+}
+
+.spiritual-border::before {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    background: linear-gradient(45deg, var(--dore-subtil), var(--vert-foret), var(--dore-subtil));
+    border-radius: 15px;
+    z-index: -1;
+    opacity: 0.3;
+}
+
+/* Versets bibliques stylisés */
+.verse-decoration {
+    position: relative;
+    padding: 20px 30px;
+    margin: 20px 0;
+}
+
+.verse-decoration::before {
+    content: "\"";
+    position: absolute;
+    top: -10px;
+    left: 10px;
+    font-size: 4em;
+    color: var(--dore-subtil);
+    opacity: 0.3;
+    font-family: 'Georgia', serif;
+}
+
+.verse-decoration::after {
+    content: "\"";
+    position: absolute;
+    bottom: -30px;
+    right: 10px;
+    font-size: 4em;
+    color: var(--dore-subtil);
+    opacity: 0.3;
+    font-family: 'Georgia', serif;
+}
+
+/* Animations spirituelles subtiles */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 5px var(--dore-subtil);
+    }
+    50% {
+        box-shadow: 0 0 20px var(--dore-subtil), 0 0 30px var(--dore-subtil);
+    }
+}
+
+.spiritual-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.spiritual-glow {
+    animation: glow 2s ease-in-out infinite;
+}
+
+/* Badges spirituels */
+.badge-spiritual {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, var(--dore-subtil) 0%, var(--vert-foret) 100%);
+    color: var(--blanc-pur);
+    border-radius: 25px;
+    font-size: 0.9em;
+    font-weight: 600;
+    font-family: 'Lato', sans-serif;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Séparateurs spirituels */
+.divider-spiritual {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--dore-subtil), transparent);
+    margin: 30px 0;
+    position: relative;
+}
+
+.divider-spiritual::before {
+    content: "✞";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--blanc-pur);
+    padding: 0 15px;
+    color: var(--dore-subtil);
+    font-size: 1.2em;
+}
+
+/* Cartes avec ambiance spirituelle */
+.card-spiritual {
+    background: var(--blanc-pur);
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 8px 32px var(--ombre-douce);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-spiritual::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--dore-subtil), var(--vert-foret), var(--dore-subtil));
+}
+
+/* Boutons avec style spirituel */
+.btn-spiritual {
+    background: linear-gradient(135deg, var(--dore-subtil) 0%, var(--vert-foret) 100%);
+    color: var(--blanc-pur);
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-spiritual::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.btn-spiritual:hover::before {
+    left: 100%;
+}
+
+.btn-spiritual:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+}
+
+/* Indicateurs de progression spirituels */
+.progress-spiritual {
+    width: 100%;
+    height: 8px;
+    background: var(--gris-doux);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-spiritual .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--vert-foret), var(--dore-subtil));
+    border-radius: 4px;
+    transition: width 0.5s ease;
+    position: relative;
+}
+
+.progress-spiritual .progress-fill::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6));
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-20px); }
+    100% { transform: translateX(20px); }
+}

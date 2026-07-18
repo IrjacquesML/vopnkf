@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test TinyMCE</title>
+    <script src="https://cdn.jsdelivr.net/npm/tinymce@6/tinymce.min.js" referrerpolicy="origin"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f0f0f0;
+            border-radius: 5px;
+            display: none;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Test TinyMCE - Création de Leçon</h1>
+    <p>Cette page teste si TinyMCE fonctionne correctement et si le contenu est bien récupéré.</p>
+    
+    <form id="testForm" method="POST" action="">
+        <div class="form-group">
+            <label for="titre">Titre de la Leçon</label>
+            <input type="text" id="titre" name="titre" required placeholder="Ex: Introduction à la Bible">
+        </div>
+        
+        <div class="form-group">
+            <label for="contenu">Contenu de la Leçon</label>
+            <textarea id="contenu" name="contenu"></textarea>
+        </div>
+        
+        <button type="submit">💾 Tester la Soumission</button>
+    </form>
+    
+    <div id="result" class="result"></div>
+    
+    <script>
+        // Initialiser TinyMCE
+        tinymce.init({
+            selector: '#contenu',
+            height: 400,
+            menubar: 'file edit view insert format tools table',
+            plugins: [
+                'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                'insertdatetime', 'media', 'table', 'help', 'wordcount'
+            ],
+            toolbar: 'undo redo | blocks fontsize | bold italic underline strikethrough forecolor backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image table | removeformat code preview fullscreen',
+            content_style: 'body { font-family: Arial, sans-serif; font-size: 14px; line-height: 1.6; }',
+            branding: false,
+            language: 'fr_FR',
+            setup: function(editor) {
+                editor.on('init', function() {
+                    console.log('✓ TinyMCE initialisé avec succès');
+                    document.getElementById('result').innerHTML = '<div class="success">✓ TinyMCE chargé avec succès ! Vous pouvez maintenant taper du texte et le formater.</div>';
+                    document.getElementById('result').style.display = 'block';
+                });
+                editor.on('change', function() {
+                    editor.save();
+                });
+            }
+        });
+        
+        // Gérer la soumission du formulaire
+        document.getElementById('testForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Synchroniser le contenu de TinyMCE
+            tinymce.triggerSave();
+            
+            // Récupérer les valeurs
+            var titre = document.getElementById('titre').value;
+            var contenu = tinymce.get('contenu').getContent();
+            
+            console.log('=== TEST DE SOUMISSION ===');
+            console.log('Titre:', titre);
+            console.log('Contenu HTML:', contenu);
+            console.log('Longueur du contenu:', contenu.length);
+            
+            // Afficher le résultat
+            var resultDiv = document.getElementById('result');
+            resultDiv.className = 'result success';
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `
+                <h3>✓ Test Réussi !</h3>
+                <p><strong>Titre:</strong> ${titre}</p>
+                <p><strong>Contenu HTML (premiers 200 caractères):</strong></p>
+                <pre style="background: white; padding: 10px; border-radius: 5px; overflow-x: auto;">${contenu.substring(0, 200)}...</pre>
+                <p><strong>Longueur totale:</strong> ${contenu.length} caractères</p>
+                <p><strong>Aperçu du rendu:</strong></p>
+                <div style="background: white; padding: 15px; border-radius: 5px; border: 1px solid #ddd;">${contenu}</div>
+                <p style="margin-top: 15px; color: #155724;"><strong>✓ Le contenu est correctement récupéré ! Vous pouvez maintenant créer des leçons.</strong></p>
+            `;
+            
+            // Faire défiler vers le résultat
+            resultDiv.scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

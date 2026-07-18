@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Menu Mobile - VOP</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        .test-content {
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .test-info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .test-info h3 {
+            margin-top: 0;
+            color: #1976d2;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>VOP Test</h2>
+            </div>
+            <div class="nav-menu">
+                <a href="#accueil">Accueil</a>
+                <a href="#lecons">Mes Leçons</a>
+                <a href="#historique">Mon Historique</a>
+                <a href="#prieres">Mes Prières</a>
+                <a href="#profil">Mon Profil</a>
+            </div>
+            <div class="nav-user">
+                <span>Utilisateur Test</span>
+                <a href="#" class="btn btn-small">Déconnexion</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenu de test -->
+    <div class="container test-content">
+        <div class="test-info">
+            <h3>🧪 Test du Menu Hamburger Mobile</h3>
+            <p><strong>Instructions :</strong></p>
+            <ol>
+                <li>Ouvrez les outils de développement (F12)</li>
+                <li>Activez le mode responsive (Ctrl+Shift+M ou Cmd+Shift+M)</li>
+                <li>Sélectionnez un appareil mobile (iPhone, Samsung, etc.)</li>
+                <li>Vous devriez voir le bouton hamburger (☰) en haut à droite</li>
+                <li>Cliquez dessus pour ouvrir/fermer le menu</li>
+            </ol>
+        </div>
+
+        <div class="test-section">
+            <h2>✅ Fonctionnalités à tester</h2>
+            <ul>
+                <li>Le bouton hamburger apparaît sur mobile (< 768px)</li>
+                <li>Le menu glisse depuis la droite quand on clique</li>
+                <li>Un overlay sombre apparaît derrière le menu</li>
+                <li>Le menu se ferme en cliquant sur l'overlay</li>
+                <li>Le menu se ferme en cliquant sur un lien</li>
+                <li>L'animation du bouton (☰ → ✕) fonctionne</li>
+                <li>Le scroll de la page est bloqué quand le menu est ouvert</li>
+                <li>La navbar se cache en scrollant vers le bas</li>
+                <li>La navbar réapparaît en scrollant vers le haut</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h2>📱 Résolutions à tester</h2>
+            <ul>
+                <li><strong>Mobile :</strong> 375px × 667px (iPhone SE)</li>
+                <li><strong>Mobile :</strong> 414px × 896px (iPhone 11 Pro Max)</li>
+                <li><strong>Tablette :</strong> 768px × 1024px (iPad)</li>
+                <li><strong>Desktop :</strong> 1920px × 1080px</li>
+            </ul>
+        </div>
+
+        <!-- Contenu long pour tester le scroll -->
+        <div class="test-section">
+            <h2>📜 Contenu de test pour le scroll</h2>
+            <p>Faites défiler cette page vers le bas pour tester le masquage automatique de la navbar sur mobile.</p>
+            <?php for ($i = 1; $i <= 20; $i++): ?>
+            <p style="margin: 20px 0; padding: 15px; background: #f5f5f5; border-radius: 5px;">
+                <strong>Section <?php echo $i; ?></strong><br>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+            <?php endfor; ?>
+        </div>
+    </div>
+
+    <script src="assets/js/script.js"></script>
+    <script>
+        // Afficher les informations de debug
+        console.log('=== DEBUG MENU MOBILE ===');
+        console.log('Largeur écran:', window.innerWidth);
+        console.log('Navbar trouvée:', !!document.querySelector('.navbar'));
+        console.log('Nav-menu trouvé:', !!document.querySelector('.nav-menu'));
+        console.log('Bouton hamburger créé:', !!document.querySelector('.nav-toggle'));
+        
+        // Surveiller les changements de taille d'écran
+        window.addEventListener('resize', function() {
+            console.log('Nouvelle largeur:', window.innerWidth);
+            console.log('Bouton visible:', window.getComputedStyle(document.querySelector('.nav-toggle')).display);
+        });
+    </script>
+</body>
+</html>

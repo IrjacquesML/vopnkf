@@ -1,0 +1,25 @@
+# Configuration pour les API
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Permettre l'accès aux fichiers PHP
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+</IfModule>
+
+# Activer CORS pour les requêtes AJAX
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+    Header set Access-Control-Allow-Headers "Content-Type"
+</IfModule>
+
+# Désactiver l'affichage des erreurs PHP dans les réponses JSON
+php_flag display_errors Off
+php_flag display_startup_errors Off
+
+# Activer allow_url_fopen pour les traductions
+php_flag allow_url_fopen On
+
+# Définir le type de contenu par défaut
+AddDefaultCharset UTF-8

@@ -1,0 +1,160 @@
+/* Icônes spirituelles — décorations & utilitaires
+   Les icônes UI principales sont en SVG via partials/icon.blade.php */
+
+.icon-cross::before,
+.icon-bible::before,
+.icon-prayer::before,
+.icon-dove::before,
+.icon-light::before,
+.icon-heart::before {
+    display: none;
+}
+
+/* Décorations spirituelles */
+.spiritual-border {
+    border: 1px solid rgba(201, 162, 39, 0.35);
+    border-radius: 14px;
+    position: relative;
+    background: linear-gradient(135deg, rgba(201, 162, 39, 0.04) 0%, rgba(45, 106, 79, 0.05) 100%);
+}
+
+.spiritual-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    padding: 1px;
+    background: linear-gradient(135deg, var(--dore-subtil), var(--vert-foret));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.45;
+}
+
+.verse-decoration {
+    position: relative;
+    padding: 20px 30px;
+    margin: 20px 0;
+}
+
+.verse-decoration::before,
+.verse-decoration::after {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 3.5em;
+    color: var(--dore-subtil);
+    opacity: 0.35;
+    line-height: 1;
+}
+
+.verse-decoration::before {
+    content: "«";
+    position: absolute;
+    top: -6px;
+    left: 8px;
+}
+
+.verse-decoration::after {
+    content: "»";
+    position: absolute;
+    bottom: -18px;
+    right: 8px;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 8px rgba(201, 162, 39, 0.25); }
+    50% { box-shadow: 0 0 18px rgba(201, 162, 39, 0.45); }
+}
+
+.spiritual-float { animation: float 3.5s ease-in-out infinite; }
+.spiritual-glow { animation: glow 2.5s ease-in-out infinite; }
+
+.badge-spiritual {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, var(--vert-foret) 0%, var(--vert-profond, #1b4332) 100%);
+    color: #fff;
+    border-radius: 999px;
+    font-size: 0.9em;
+    font-weight: 600;
+    box-shadow: 0 4px 14px rgba(45, 106, 79, 0.28);
+}
+
+.divider-spiritual {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--dore-subtil), transparent);
+    margin: 30px 0;
+    position: relative;
+}
+
+.divider-spiritual::before {
+    content: "✝";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--blanc-pur, #fff);
+    padding: 0 14px;
+    color: var(--dore-subtil);
+    font-size: 1.1em;
+}
+
+.card-spiritual {
+    background: #fff;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 8px 28px rgba(27, 67, 50, 0.08);
+    border: 1px solid rgba(201, 162, 39, 0.22);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-spiritual::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--dore-subtil), var(--vert-foret), var(--dore-subtil));
+}
+
+.btn-spiritual {
+    background: linear-gradient(135deg, var(--vert-foret) 0%, var(--vert-profond, #1b4332) 100%);
+    color: #fff;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 4px 16px rgba(45, 106, 79, 0.28);
+}
+
+.btn-spiritual:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 22px rgba(45, 106, 79, 0.35);
+}
+
+.progress-spiritual {
+    width: 100%;
+    height: 8px;
+    background: var(--gris-doux, #f0f2f4);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-spiritual .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--vert-foret), var(--dore-subtil));
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
