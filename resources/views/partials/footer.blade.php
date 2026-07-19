@@ -29,6 +29,7 @@
             <div class="footer-section">
                 <h3>Liens utiles</h3>
                 <ul class="footer-links">
+                    <li><a href="{{ route('about') }}">À propos</a></li>
                     @auth
                         <li><a href="{{ route('dashboard') }}">Mes Leçons</a></li>
                         <li><a href="{{ route('history.index') }}">Mon Historique</a></li>

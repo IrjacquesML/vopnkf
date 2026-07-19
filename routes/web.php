@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/a-propos', [HomeController::class, 'about'])->name('about');
 
 Route::get('/connexion', [LoginController::class, 'show'])->name('connexion');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
@@ -105,6 +106,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('/lecons/{lesson}', [AdminLessonController::class, 'destroy'])->name('lessons.destroy');
 
         Route::post('/lecons/{lesson}/questions', [AdminLessonController::class, 'storeQuestion'])->name('lessons.questions.store');
+        Route::delete('/lecons/{lesson}/questions', [AdminLessonController::class, 'destroyQuestions'])->name('lessons.questions.destroy-multiple');
         Route::put('/lecons/{lesson}/questions/{question}', [AdminLessonController::class, 'updateQuestion'])->name('lessons.questions.update');
         Route::delete('/lecons/{lesson}/questions/{question}', [AdminLessonController::class, 'destroyQuestion'])->name('lessons.questions.destroy');
 

@@ -261,6 +261,28 @@ class LessonController extends Controller implements HasMiddleware
         return back()->with('success', 'Question supprimée avec succès.');
     }
 
+    public function destroyQuestions(Request $request, Lecon $lesson): RedirectResponse
+    {
+        $validated = $request->validate([
+            'question_ids' => ['required', 'array', 'min:1'],
+            'question_ids.*' => ['integer', 'exists:questions,id'],
+        ], [
+            'question_ids.required' => 'Sélectionnez au moins une question.',
+            'question_ids.min' => 'Sélectionnez au moins une question.',
+        ]);
+
+        $deleted = Question::query()
+            ->where('lecon_id', $lesson->id)
+            ->whereIn('id', $validated['question_ids'])
+            ->delete();
+
+        if ($deleted === 0) {
+            return back()->with('error', 'Aucune question valide à supprimer.');
+        }
+
+        return back()->with('success', $deleted.' question(s) supprimée(s) avec succès.');
+    }
+
     public function storeOption(Request $request, Lecon $lesson, Question $question): RedirectResponse
     {
         if ($question->lecon_id !== $lesson->id) {

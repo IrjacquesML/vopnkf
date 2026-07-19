@@ -69,12 +69,36 @@
                     </div>
                 @endif
 
+                <form id="bulk-delete-questions"
+                      method="POST"
+                      action="{{ route('admin.lessons.questions.destroy-multiple', $lesson) }}"
+                      onsubmit="return confirm('Supprimer les questions sélectionnées ?')">
+                    @csrf
+                    @method('DELETE')
+                    <div class="questions-bulk-actions">
+                        <label class="questions-select-all">
+                            <input type="checkbox" id="select-all-questions">
+                            Tout sélectionner
+                        </label>
+                        <button type="submit" class="btn btn-small btn-danger" id="bulk-delete-questions-btn" disabled>
+                            🗑 Supprimer la sélection
+                        </button>
+                    </div>
+                </form>
+
                 <div class="questions-list">
                     @foreach ($lesson->questions as $index => $question)
                         <div class="question-item">
                             <div class="question-header">
                                 <h4>
-                                    Question {{ $index + 1 }}
+                                    <label class="question-select">
+                                        <input type="checkbox"
+                                               form="bulk-delete-questions"
+                                               name="question_ids[]"
+                                               value="{{ $question->id }}"
+                                               class="question-checkbox">
+                                        Question {{ $index + 1 }}
+                                    </label>
                                     @if ($question->options->where('est_correcte', true)->isEmpty())
                                         <span style="color:#c0392b; font-size:.85rem;">— bonne réponse manquante</span>
                                     @endif
@@ -175,5 +199,35 @@
         language: 'fr_FR',
         content_style: 'body { font-family: Lato, sans-serif; font-size: 14px; }'
     });
+
+    (function () {
+        const selectAll = document.getElementById('select-all-questions');
+        const checkboxes = document.querySelectorAll('.question-checkbox');
+        const bulkBtn = document.getElementById('bulk-delete-questions-btn');
+
+        if (!selectAll || !bulkBtn || checkboxes.length === 0) {
+            return;
+        }
+
+        function syncBulkState() {
+            const checkedCount = document.querySelectorAll('.question-checkbox:checked').length;
+            bulkBtn.disabled = checkedCount === 0;
+            selectAll.checked = checkedCount === checkboxes.length;
+            selectAll.indeterminate = checkedCount > 0 && checkedCount < checkboxes.length;
+        }
+
+        selectAll.addEventListener('change', function () {
+            checkboxes.forEach(function (checkbox) {
+                checkbox.checked = selectAll.checked;
+            });
+            syncBulkState();
+        });
+
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener('change', syncBulkState);
+        });
+
+        syncBulkState();
+    })();
 </script>
 @endpush

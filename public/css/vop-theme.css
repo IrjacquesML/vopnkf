@@ -714,7 +714,8 @@ body.admin-body .admin-container {
 .prayers-container,
 .prayer-container,
 .results-container,
-.admin-container {
+.admin-container,
+.about-card {
     background: rgba(255, 255, 255, 0.94);
     border: 1px solid rgba(201, 162, 39, 0.18);
     box-shadow: 0 16px 40px var(--ombre-douce);
