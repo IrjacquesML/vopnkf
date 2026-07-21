@@ -72,11 +72,13 @@
                         &nbsp;/&nbsp;<u>{{ $year }}</u>
                     </div>
 
-                    <div class="cert-signatures">
+                    <div class="cert-signatures" data-count="{{ count($signatories) }}">
                         @foreach ($signatories as $signatory)
                             <div class="cert-sig">
-                                <div class="sig-role">{{ $signatory['role'] }}</div>
+                                <div class="sig-space" aria-hidden="true"></div>
+                                <div class="sig-line"></div>
                                 <div class="sig-nom">{{ $signatory['nom'] }}</div>
+                                <div class="sig-role">{{ $signatory['role'] }}</div>
                             </div>
                         @endforeach
                     </div>
@@ -300,28 +302,59 @@
             margin-top: 8mm;
         }
         .cert-signatures {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 10mm;
-            gap: 6mm;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            align-items: end;
+            gap: 8mm;
+            margin-top: 8mm;
+            width: 100%;
+        }
+        .cert-signatures[data-count="1"] {
+            grid-template-columns: minmax(0, 1fr);
+            max-width: 90mm;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cert-signatures[data-count="2"] {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            max-width: 180mm;
+            margin-left: auto;
+            margin-right: auto;
         }
         .cert-sig {
-            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
-            border-top: 1.5px solid #00838f;
-            padding-top: 4mm;
+            min-width: 0;
         }
-        .cert-sig .sig-role {
-            font-size: 8pt;
-            color: #555;
-            text-transform: uppercase;
-            letter-spacing: .04em;
-            margin-bottom: 2mm;
+        .cert-sig .sig-space {
+            width: 100%;
+            height: 14mm;
+        }
+        .cert-sig .sig-line {
+            width: 100%;
+            max-width: 58mm;
+            height: 0;
+            border-top: 1.5px solid #00838f;
+            margin-bottom: 2.5mm;
         }
         .cert-sig .sig-nom {
-            font-size: 9pt;
+            font-size: 9.5pt;
             font-weight: 700;
             color: #1a1a1a;
+            line-height: 1.25;
+            margin-bottom: 1.5mm;
+            max-width: 100%;
+        }
+        .cert-sig .sig-role {
+            font-size: 7.5pt;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: .03em;
+            line-height: 1.35;
+            max-width: 100%;
+            text-wrap: balance;
         }
 
         @media print {
@@ -410,15 +443,24 @@
             .cert-divider { margin-bottom: 5mm !important; }
             .cert-subtitle { margin-bottom: 5mm !important; }
             .cert-body { flex: 0 1 auto !important; line-height: 1.7 !important; }
-            .cert-date { margin-top: 5mm !important; }
-            .cert-signatures { margin-top: 6mm !important; }
+            .cert-date { margin-top: 4mm !important; }
+            .cert-signatures {
+                margin-top: 5mm !important;
+                gap: 7mm !important;
+            }
+            .cert-sig .sig-space { height: 12mm !important; }
         }
 
         @media (max-width: 900px) {
             .cert-content { padding-right: 18mm; }
             .cert-side-bar, .cert-bottom-bar { width: 12mm; }
             .cert-title { font-size: 20pt; }
-            .cert-signatures { flex-direction: column; }
+            .cert-signatures {
+                grid-template-columns: 1fr !important;
+                max-width: none !important;
+                gap: 8mm;
+            }
+            .cert-sig .sig-space { height: 10mm; }
         }
     </style>
 @endpush
