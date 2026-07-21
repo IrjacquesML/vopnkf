@@ -325,26 +325,93 @@
         }
 
         @media print {
-            @page { size: A4 landscape; margin: 0; }
-            body, html { margin: 0 !important; padding: 0 !important; background: #f5f5f0 !important; }
-            .navbar, .admin-footer, .admin-header, .no-print, .footer { display: none !important; }
-            body { padding-top: 0 !important; }
-            .admin-container, .container {
+            @page {
+                size: A4 landscape;
+                margin: 0;
+            }
+
+            html, body {
+                width: 297mm !important;
+                height: 210mm !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: hidden !important;
+                background: #f5f5f0 !important;
+            }
+
+            body.admin-body {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                padding: 0 !important;
+            }
+
+            .admin-topbar,
+            .admin-footer,
+            .admin-header,
+            .admin-toolbar,
+            .navbar,
+            .footer,
+            .no-print {
+                display: none !important;
+            }
+
+            .admin-main {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 100% !important;
+                height: 100% !important;
+                min-height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .admin-container,
+            .container {
+                display: flex !important;
+                align-items: center !important;
+                justify-content: center !important;
+                width: 100% !important;
                 max-width: none !important;
+                height: 100% !important;
                 margin: 0 !important;
                 padding: 0 !important;
                 background: transparent !important;
                 box-shadow: none !important;
                 border: none !important;
             }
+
             #cert-wrap {
                 width: 297mm !important;
-                max-width: none !important;
-                min-height: 210mm !important;
-                margin: 0 !important;
+                height: 210mm !important;
+                max-width: 297mm !important;
+                min-height: 0 !important;
+                max-height: 210mm !important;
+                margin: 0 auto !important;
+                overflow: hidden !important;
                 box-shadow: none !important;
                 border-radius: 0 !important;
+                page-break-inside: avoid !important;
+                break-inside: avoid !important;
+                page-break-after: avoid !important;
+                break-after: avoid !important;
             }
+
+            .cert-content {
+                min-height: 0 !important;
+                height: 100% !important;
+                padding: 10mm 50mm 10mm 14mm !important;
+                justify-content: space-between !important;
+                box-sizing: border-box !important;
+            }
+
+            .cert-header { margin-bottom: 4mm !important; }
+            .cert-divider { margin-bottom: 5mm !important; }
+            .cert-subtitle { margin-bottom: 5mm !important; }
+            .cert-body { flex: 0 1 auto !important; line-height: 1.7 !important; }
+            .cert-date { margin-top: 5mm !important; }
+            .cert-signatures { margin-top: 6mm !important; }
         }
 
         @media (max-width: 900px) {
